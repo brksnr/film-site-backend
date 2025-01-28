@@ -1,10 +1,10 @@
-package com.example.demo.service;
+package com.example.demo.services;
 
 import com.example.demo.exceptions.ApiException;
 import com.example.demo.memberEntity.Member;
 import com.example.demo.memberEntity.Role;
-import com.example.demo.repisitory.MemberRepository;
-import com.example.demo.repisitory.RoleRepository;
+import com.example.demo.repository.MemberRepository;
+import com.example.demo.repository.RoleRepository;
 import io.jsonwebtoken.Jwt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -24,11 +24,11 @@ public class AuthenticationService {
 
     private PasswordEncoder passwordEncoder;
 
-    private com.example.demo.service.JwtService jwtService;
+    private com.example.demo.services.JwtService jwtService;
 
 
     @Autowired
-    public AuthenticationService(MemberRepository memberRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, com.example.demo.service.JwtService jwtService) {
+    public AuthenticationService(MemberRepository memberRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder, com.example.demo.services.JwtService jwtService) {
         this.memberRepository = memberRepository;
         this.roleRepository = roleRepository;
         this.passwordEncoder = passwordEncoder;

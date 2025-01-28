@@ -1,8 +1,8 @@
-package com.example.demo.service;
+package com.example.demo.services;
 
 import com.example.demo.dto.GenreDto;
 import com.example.demo.entity.Genre;
-import com.example.demo.repisitory.GenreRepository;
+import com.example.demo.repository.GenreRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

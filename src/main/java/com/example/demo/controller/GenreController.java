@@ -4,7 +4,7 @@ package com.example.demo.controller;
 import com.example.demo.dto.GenreDto;
 import com.example.demo.dto.StarDto;
 import com.example.demo.entity.Genre;
-import com.example.demo.service.GenreService;
+import com.example.demo.services.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
