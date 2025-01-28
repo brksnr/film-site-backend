@@ -11,7 +11,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class StarServiceImpl implements StarService {
+public class StarServiceImpl implements com.example.demo.service.StarService {
 
     private final StarRepository starRepository;
 
