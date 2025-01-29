@@ -33,6 +33,7 @@ public class MemberController {
         Optional<Films> filmOpt = filmsRepository.findById(filmId);
         if (filmOpt.isEmpty()) {
             return new ResponseEntity<>("Film not found", HttpStatus.NOT_FOUND);
+
         }
 
         Member member = memberOpt.get();
