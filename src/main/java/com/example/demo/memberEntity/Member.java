@@ -1,5 +1,7 @@
 package com.example.demo.memberEntity;
 
+import com.example.demo.dto.FilmDto;
+import com.example.demo.entity.Films;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +30,14 @@ public class Member implements UserDetails {
     private String email;
     @Column(name="password")
     private String password;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "member_favorite_films",
+            joinColumns = @JoinColumn(name = "member_id"),
+            inverseJoinColumns = @JoinColumn(name = "film_id")
+    )
+    private Set<Films> favorites;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="member_role",
@@ -97,5 +107,21 @@ public class Member implements UserDetails {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Set<Films> getFavorites() {
+        return favorites;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Member member = (Member) o;
+        return Objects.equals(favorites, member.favorites);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(favorites);
     }
 }
