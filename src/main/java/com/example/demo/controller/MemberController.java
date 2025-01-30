@@ -3,7 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.entity.Films;
 import com.example.demo.memberEntity.Member;
 import com.example.demo.repository.FilmsRepository;
-import com.example.demo.repository.FilmsRepository;
 import com.example.demo.repository.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -54,10 +53,10 @@ public class MemberController {
         }
 
         Member member = memberOpt.get();
-        return new ResponseEntity<>(member.getFavorites(), HttpStatus.OK);
+        return new ResponseEntity<>(member.toFilmsDto(), HttpStatus.OK);
     }
 
-    // Kullanıcının favorisinden film çıkarma
+
     @DeleteMapping("/{username}/favorites")
     public ResponseEntity<String> removeFavoriteFilm(@PathVariable String username, @RequestParam Long filmId) {
         Optional<Member> memberOpt = memberRepository.findUserByUsername(username);

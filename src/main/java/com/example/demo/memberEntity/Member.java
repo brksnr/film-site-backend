@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -44,6 +45,22 @@ public class Member implements UserDetails {
             joinColumns = {@JoinColumn(name = "member_id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id")})
     private Set<Role> authorities = new HashSet<>();
+
+
+    public List<FilmDto> toFilmsDto() {
+        return favorites.stream()
+                .map(film -> new FilmDto(
+                        film.getId(),
+                        film.getName(),
+                        film.getDirector(),
+                        film.getDescription(),
+                        null,
+                        film.getImdbRank(),
+                        film.getImageUrl(),
+                        null
+                ))
+                .collect(Collectors.toList());
+    }
 
 
 

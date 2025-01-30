@@ -1,6 +1,7 @@
 package com.example.demo.services;
 
 
+import com.example.demo.dto.FilmDto;
 import com.example.demo.entity.Films;
 import com.example.demo.memberEntity.Member;
 import com.example.demo.repository.MemberRepository;
@@ -11,6 +12,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -56,10 +58,11 @@ public class MemberService implements UserDetailsService {
     }
 
 
-    public Set<Films> getFavoriteFilms(String username) {
+    public List<FilmDto> getFavoriteFilms(String username) {
         Optional<Member> memberOpt = memberRepository.findUserByUsername(username);
-        return memberOpt.map(Member::getFavorites).orElse(Collections.emptySet());
+        return memberOpt.map(Member::toFilmsDto).orElse(Collections.emptyList());
     }
+
 
 
 }
