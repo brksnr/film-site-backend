@@ -5,6 +5,8 @@ import com.example.demo.entity.Films;
 import com.example.demo.entity.Genre;
 import com.example.demo.repository.FilmsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,9 +25,9 @@ public class FilmsServiceImpl implements FilmsService {
     }
 
     @Override
-    public List<FilmDto> findAll() {
-        List<Films> films = filmsRepository.findAll();
-        return films.stream()
+    public Page<FilmDto> findAll(Pageable pageable) {
+        Page<Films> films = filmsRepository.findAll(pageable);
+        return films
                 .map(film -> new FilmDto(
                         film.getId(),
                         film.getName(),
@@ -35,8 +37,7 @@ public class FilmsServiceImpl implements FilmsService {
                         film.getImdbRank(),
                         film.getImageUrl(),
                         film.toStarsDto()
-                ))
-                .collect(Collectors.toList());
+                ));
     }
 
     @Override

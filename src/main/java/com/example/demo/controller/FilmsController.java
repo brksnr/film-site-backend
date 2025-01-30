@@ -3,7 +3,8 @@ package com.example.demo.controller;
 import com.example.demo.dto.FilmDto;
 import com.example.demo.entity.Films;
 import com.example.demo.services.FilmsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,11 +23,8 @@ public class FilmsController {
     }
 
     @GetMapping
-    public List<FilmDto> findAllFilms() {
-
-        List<FilmDto> bakalım = filmsService.findAll();
-        System.out.println(bakalım);
-        return filmsService.findAll();
+    public Page<FilmDto> findAllFilms(Pageable pageable) {
+        return filmsService.findAll(pageable);
     }
 
     @GetMapping("/{id}")

@@ -57,8 +57,8 @@ public class MemberController {
     }
 
 
-    @DeleteMapping("/{username}/favorites")
-    public ResponseEntity<String> removeFavoriteFilm(@PathVariable String username, @RequestParam Long filmId) {
+    @DeleteMapping("/{username}/favorites/{filmId}")
+    public ResponseEntity<String> removeFavoriteFilm(@PathVariable String username, @PathVariable Long filmId) {
         Optional<Member> memberOpt = memberRepository.findUserByUsername(username);
         if (memberOpt.isEmpty()) {
             return new ResponseEntity<>("User not found", HttpStatus.NOT_FOUND);
@@ -72,10 +72,11 @@ public class MemberController {
         Member member = memberOpt.get();
         Films film = filmOpt.get();
 
-        // Filmi favorilerden çıkarma
         member.getFavorites().remove(film);
         memberRepository.save(member);
 
         return new ResponseEntity<>("Film removed from favorites", HttpStatus.OK);
     }
+
 }
+
